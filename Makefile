@@ -1,9 +1,9 @@
 # Run Service
 up:
-	docker compose up -d
+	docker compose -f compose.yaml up -d
 
 down:
-	docker compose down
+	docker compose -f compose.yaml down
 
 
 # Run Test Service

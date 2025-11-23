@@ -43,9 +43,9 @@ func setupDBVerifier(t *testing.T) *DBVerifier {
 	dbVerifier, err := NewDBVerifier(
 		os.Getenv("LOCALHOST"),
 		os.Getenv("TEST_DATABASE_PORT"),
-		os.Getenv("TEST_DATABASE_USER"),
-		os.Getenv("TEST_DATABASE_PASSWORD"),
-		os.Getenv("TEST_DATABASE_NAME"),
+		os.Getenv("DATABASE_USER"),
+		os.Getenv("DATABASE_PASSWORD"),
+		os.Getenv("DATABASE_NAME"),
 	)
 	if err != nil {
 		t.Fatalf("failed to create DB verifier: %v", err)

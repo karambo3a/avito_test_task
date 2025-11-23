@@ -88,7 +88,8 @@ func TestAddTeam(t *testing.T) {
 				TeamName: fmt.Sprintf("empty-team-%d", timestamp),
 				Members:  []model.TeamMember{},
 			},
-			expectedStatus: http.StatusCreated,
+			expectedStatus: http.StatusBadRequest,
+			errorCode:      model.CodeEmptyField,
 		},
 		{
 			name: "Team with member missing required fields",

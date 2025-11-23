@@ -44,13 +44,9 @@ func (r *PRPostgresRepository) CreatePR(ctx context.Context, pullRequestID, pull
 		WHERE pr_id = $1`,
 		pullRequestID)
 	var id string
-	if err = result.Scan(&id); err != nil {
-		if err == sql.ErrNoRows {
-			log.Printf("pr exists: %s", pullRequestID)
-			return nil, model.NewPRExistsError()
-		}
-		log.Printf("scan error: %v", err)
-		return nil, fmt.Errorf("scan error: %w", err)
+	if err = result.Scan(&id); err == nil || err != sql.ErrNoRows {
+		log.Printf("pr exists: %s", pullRequestID)
+		return nil, model.NewPRExistsError()
 	}
 
 	reviewers, err := r.FindReviewers(ctx, tx, authorID)
